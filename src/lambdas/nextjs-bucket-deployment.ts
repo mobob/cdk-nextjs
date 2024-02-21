@@ -350,8 +350,11 @@ function getPutObjectOptions({
 }): Partial<PutObjectCommandInput> {
   let putObjectOptions: Partial<PutObjectCommandInput> = {};
   for (const [key, value] of Object.entries(putConfig)) {
+    console.info(`Checking if ${path} matches ${key}, current putObjectOptions: `, putObjectOptions);
     if (micromatch.isMatch(path, key)) {
+      console.info(`Pre match on ${path} matches ${key}!`);
       putObjectOptions = { ...putObjectOptions, ...value };
+      console.info(`Post match on ${path} matches ${key}, new putObjectOptions: `, putObjectOptions);
     }
   }
   return putObjectOptions;
